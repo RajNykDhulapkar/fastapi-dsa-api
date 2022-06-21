@@ -1,15 +1,13 @@
-import imp
-from typing import Optional
-from fastapi import FastAPI, Depends, HTTPException
-from pydantic import BaseModel
-from sqlalchemy.orm import Session
+
+from fastapi import FastAPI
 from starlette.responses import RedirectResponse
 from fastapi.middleware.cors import CORSMiddleware
 
-from . import models, schemas
+from . import models
 from .database import SessionLocal, engine
 
 models.Base.metadata.create_all(bind=engine)
+print('db created')
 
 app = FastAPI()
 
@@ -27,6 +25,7 @@ app.add_middleware(
 def get_db():
     try:
         db = SessionLocal()
+        print('db connected')
         yield db
     finally:
         db.close()
