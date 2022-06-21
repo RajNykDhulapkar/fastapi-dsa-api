@@ -1,0 +1,6 @@
+# Environment
+venv
+
+.vscode
+**/**/__pycache__
+thunder-tests
